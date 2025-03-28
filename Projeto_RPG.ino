@@ -6,6 +6,7 @@
 #define button2 3
 #define button3 4
 #define buttonFunction 5
+#define buzzer 6
 
 int estado = 0;
 
@@ -25,6 +26,7 @@ void setup() {
   pinMode(11, OUTPUT);
   pinMode(10, OUTPUT);
   pinMode(9, OUTPUT);
+  pinMode(buzzer, OUTPUT);
   delay(1000);
 }
 
@@ -44,7 +46,7 @@ void loop() {
     dice(350);
   } 
   else if (estado == 1) {
-    // Função 1
+    actions(1800);
   } 
   else if (estado == 2) {
     // Função 2
@@ -54,9 +56,96 @@ void loop() {
   }
 }
 
-// void function_selector (void) {
-//   if 
-// }
+void actions(int tempo_ligado){
+  while(true){
+    digitalWrite(pinLed3, 1);
+    if(digitalRead(button1) == 1){
+      int randomNumber = random(1, 21);
+
+      if(randomNumber >= 10){
+        Serial.print("Sucesso no ataque! PARA TESTES, TIROU: ");
+        Serial.println(randomNumber);
+        digitalWrite(pinLed3, 0);
+        digitalWrite(pinLed4, 1);
+        tone(buzzer, 800);
+        delay(tempo_ligado);
+        digitalWrite(pinLed4, 0);
+        noTone(buzzer);
+        digitalWrite(pinLed3, 1);
+
+      }
+      else{
+        Serial.print("Falha no ataque! PARA TESTES, TIROU: ");
+        Serial.println(randomNumber);
+        digitalWrite(pinLed3, 0);
+        digitalWrite(pinLed1, 1);
+        tone(buzzer, 400);
+        delay(tempo_ligado);
+        digitalWrite(pinLed1, 0);
+        noTone(buzzer);
+        digitalWrite(pinLed3, 1);
+      }
+    }
+
+    if(digitalRead(button2) == 1){
+      int randomNumber = random(1, 21);
+
+      if(randomNumber >= 10){
+        Serial.print("Sucesso na defesa! PARA TESTES, TIROU: ");
+        Serial.println(randomNumber);
+        digitalWrite(pinLed3, 0);
+        digitalWrite(pinLed4, 1);
+        tone(buzzer, 800);
+        delay(tempo_ligado);
+        digitalWrite(pinLed4, 0);
+        noTone(buzzer);
+        digitalWrite(pinLed3, 1);
+
+      }
+      else{
+        Serial.print("Falha na defesa! PARA TESTES, TIROU: ");
+        Serial.println(randomNumber);
+        digitalWrite(pinLed3, 0);
+        digitalWrite(pinLed1, 1);
+        tone(buzzer, 400);
+        delay(tempo_ligado);
+        digitalWrite(pinLed1, 0);
+        noTone(buzzer);
+        digitalWrite(pinLed3, 1);
+      }
+    }
+
+    if(digitalRead(button3) == 1){
+      int randomNumber = random(1, 21);
+
+      if(randomNumber >= 10){
+        Serial.print("Sucesso na interacao! PARA TESTES, TIROU: ");
+        Serial.println(randomNumber);
+        digitalWrite(pinLed3, 0);
+        digitalWrite(pinLed4, 1);
+        tone(buzzer, 800);
+        delay(tempo_ligado);
+        digitalWrite(pinLed4, 0);
+        noTone(buzzer);
+        digitalWrite(pinLed3, 1);
+
+      }
+      else{
+        Serial.print("Falha na interacao! PARA TESTES, TIROU: ");
+        Serial.println(randomNumber);
+        digitalWrite(pinLed3, 0);
+        digitalWrite(pinLed1, 1);
+        tone(buzzer, 400);
+        delay(tempo_ligado);
+        digitalWrite(pinLed1, 0);
+        noTone(buzzer);
+        digitalWrite(pinLed3, 1);
+      }
+    }
+  }
+}
+
+
 
 void dice (int delay_piscada){
 
@@ -71,8 +160,10 @@ void dice (int delay_piscada){
       Serial.println(randomNumber);
 
       for(int i = 0; i < randomNumber; i++){
+        tone(buzzer, 600);
         digitalWrite(pinLed1, 1);
         delay(delay_piscada);
+        noTone(buzzer);
         digitalWrite(pinLed1, 0);
         delay(delay_piscada);
       }
@@ -89,8 +180,10 @@ void dice (int delay_piscada){
       Serial.println(randomNumber);
 
       for(int i = 0; i < randomNumber; i++){
+        tone(buzzer, 600);
         digitalWrite(pinLed2, 1);
         delay(delay_piscada);
+        noTone(buzzer);
         digitalWrite(pinLed2, 0);
         delay(delay_piscada);
       }
@@ -106,8 +199,10 @@ void dice (int delay_piscada){
       Serial.println(randomNumber);
 
       for(int i = 0; i < randomNumber; i++){
+        tone(buzzer, 600);
         digitalWrite(pinLed3, 1);
         delay(delay_piscada);
+        noTone(buzzer);
         digitalWrite(pinLed3, 0);
         delay(delay_piscada);
       }
