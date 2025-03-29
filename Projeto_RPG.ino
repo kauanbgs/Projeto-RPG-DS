@@ -55,21 +55,28 @@ void loop() {
   } 
   else if (estado == 2) {
     vida_func();
-  } 
+  }
   else if (estado == 3) {
     // Função 3
   }
 }
 
 void vida_func(void){
-  digitalWrite(pinLed2, HIGH);
+  // Se botão for pressionado, troca de personagem
   if (digitalRead(button1) == HIGH) { 
     personagem++;
     if (personagem > 4) personagem = 1;
     Serial.print("Selecionado: Personagem ");
     Serial.println(personagem);
     delay(300);
+    for (int i = 0; i < personagem; i++) {
+      digitalWrite(pinLed2, HIGH);   // Acende o LED
+      delay(250);                    // Mantém o LED aceso por 250 ms
+      digitalWrite(pinLed2, LOW);    // Apaga o LED
+      delay(250);                    // Mantém o LED apagado por 250 ms
+    }
   }
+
   if(personagem == 1){
     if(digitalRead(button3) == HIGH){
       vida1 -= 10;
@@ -84,6 +91,8 @@ void vida_func(void){
       Serial.print("PERSO 1: Sua vida e: ");
       Serial.println(vida1);
       delay(300);
+    
+
     }
 
   if(vida1 > 70){
